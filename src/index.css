@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.pixel-corners {
+  clip-path: polygon(
+    0 4px,
+    4px 4px,
+    4px 0,
+    calc(100% - 4px) 0,
+    calc(100% - 4px) 4px,
+    100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%,
+    4px 100%,
+    4px calc(100% - 4px),
+    0 calc(100% - 4px)
+  );
+}
+
+.retro-gradient {
+  background: linear-gradient(
+    135deg,
+    #2c0051,
+    #1e0c41,
+    #000428
+  );
+}
+
+.neon-text {
+  text-shadow: 0 0 5px #fff,
+               0 0 10px #fff,
+               0 0 20px #0ff,
+               0 0 30px #0ff,
+               0 0 40px #0ff;
+}
+
+.scanline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 255, 255, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}
+
+.pixel-btn {
+  @apply relative px-6 py-3 font-bold text-white transition-all duration-300
+         before:absolute before:inset-0 before:transition-all
+         hover:before:scale-110 hover:before:opacity-0
+         active:scale-95;
+  background: linear-gradient(45deg, #ff00ff, #00ffff);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5),
+              0 0 20px rgba(255, 0, 255, 0.3);
+}
